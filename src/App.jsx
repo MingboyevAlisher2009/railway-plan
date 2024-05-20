@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/super-admin" element={<GlobalPage />}>
-          <Route path="boshqaru-paneli" element={<MainPage />} />
+          <Route path="boshqaruv-paneli" element={<MainPage />} />
           <Route path="hodimlar" element={<Hodimlar />} />
           <Route path="pd" element={<YolUstalari />} />
           <Route path="jadval" element={<Jadval />} />
