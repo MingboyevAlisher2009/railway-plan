@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const YolUstalari = () => {
-  return (
-    <div>YolUstalari</div>
-  )
-}
+  const params = useNavigate("/super-admin/");
 
-export default YolUstalari
+  console.log(params);
+
+  return (
+    <div>
+      <h1>Yo'l ustalari</h1>
+    </div>
+  );
+};
+
+export default YolUstalari;

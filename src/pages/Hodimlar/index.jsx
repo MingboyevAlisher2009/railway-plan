@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Hodimlar = () => {
   return (
-    <div>Hodimlar</div>
-  )
-}
+    <section>
+      <h1>Helo</h1>
+    </section>
+  );
+};
 
-export default Hodimlar
+export default Hodimlar;

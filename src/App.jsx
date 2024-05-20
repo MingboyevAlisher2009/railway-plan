@@ -9,14 +9,15 @@ import {
   Manzil,
   YolUstalari,
 } from "./pages";
+import GlobalPage from "./pages/admin-global-page";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/super-admin">
-          <Route path="boshqaruv-paneli" element={<MainPage />} />
+        <Route path="/super-admin" element={<GlobalPage />}>
+          <Route path="boshqaru-paneli" element={<MainPage />} />
           <Route path="hodimlar" element={<Hodimlar />} />
           <Route path="pd" element={<YolUstalari />} />
           <Route path="jadval" element={<Jadval />} />

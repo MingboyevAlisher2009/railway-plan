@@ -1,0 +1,6 @@
+.saidbar li a.active {
+  position: relative;
+  color: white;
+  fill: white;
+  background-image: linear-gradient(to top right, #212121, #404040);
+}
