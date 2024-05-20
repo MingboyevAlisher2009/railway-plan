@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth";
 import { setItem } from "../../helpers/storege";
+import { toast } from "sonner";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -21,8 +22,10 @@ const Login = () => {
       } else if (data.message === "ROLE_LEADER") {
         navigate("/leader/boshqaruv-paneli");
       }
+      toast.success('Successfully registered')
     } catch (error) {
       console.log(error);
+      toast.error('User error');
     }
   };
 
