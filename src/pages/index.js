@@ -6,3 +6,4 @@ export { default as Jadval } from "./Jadval";
 export { default as Kuzatuv } from "./Kuzatuv";
 export { default as Asboblar } from "./Asboblar";
 export { default as Manzil } from "./Manzil";
+export { default as Login } from "./Login";

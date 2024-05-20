@@ -1,16 +1,11 @@
-const setItem = (key, value) => {
-  localStorage.setItem(key, value);
-  return;
+export const setItem = (key, value) => {
+  return localStorage.setItem(key, value);
 };
 
-const getItem = (key) => {
-  localStorage.getItem(key);
-  return;
+export const getItem = (key) => {
+  return localStorage.getItem(key);
 };
 
-const removeItems = () => {
-  localStorage.clear();
-  return;
+export const removeItems = () => {
+  return localStorage.clear();
 };
-
-export default { setItem, getItem, removeItems };

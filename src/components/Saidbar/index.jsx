@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../style/style.css";
-import { TERipple } from "tw-elements-react";
 
 const saidbarItem = [
   {
@@ -18,7 +17,7 @@ const saidbarItem = [
       </svg>
     ),
     label: "Boshqaruv Paneli",
-    route: "/super-admin/boshqaru-paneli",
+    route: "/super-admin/boshqaruv-paneli",
   },
   {
     img: (
@@ -170,6 +169,7 @@ const saidbarItem = [
 ];
 
 const Saidbar = () => {
+
   return (
     <aside className="fixed z-50 border-2 p-4 bg-white rounded-lg h-[95%]">
       <Link to={"/super-admin/"}>
