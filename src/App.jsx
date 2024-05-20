@@ -24,7 +24,7 @@ function App() {
   console.log(role);
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate("/");
     } else if (token && role === "ROLE_SUPER_ADMIN") {
       setAdmin(true);
       navigate("/super-admin/boshqaruv-paneli");
