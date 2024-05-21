@@ -18,22 +18,16 @@ function App() {
   const navigate = useNavigate();
   const token = getItem("token");
   const role = getItem("role");
-  const [admin, setAdmin] = useState();
-  const [leader, setLeader] = useState();
 
   useEffect(() => {
     if (!token) {
       navigate("/");
-    }
-    if (
+    } else if (
       (token && role === "ROLE_SUPER_ADMIN") ||
       (token && role === "ROLE_ADMIN")
     ) {
-      setAdmin(true);
       navigate("/super-admin/boshqaruv-paneli");
-    }
-    if (token && role === "ROLE_LEADER") {
-      setLeader(true);
+    } else if (token && role === "ROLE_LEADER") {
       navigate("/leader/boshqaruv-paneli");
     }
   }, []);
@@ -41,7 +35,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path="*" element={<Home />} /> */}
+        <Route path="*" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/super-admin" element={<GlobalPage />}>
