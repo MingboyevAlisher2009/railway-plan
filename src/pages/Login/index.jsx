@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth";
 import { setItem } from "../../helpers/storege";
@@ -14,21 +14,21 @@ const Login = () => {
     const userData = { phoneNumber: `+${phoneNumber}`, password };
     try {
       const { data } = await AuthService.login(userData);
-      console.log(data);
       setItem("token", data.body);
       setItem("role", data.message);
-      if (
-        data.message === "ROLE_SUPER_ADMIN" ||
-        data.message === "ROLE_ADMIN"
-      ) {
+      if (data.message === "ROLE_SUPER_ADMIN") {
+        navigate("/super-admin/boshqaruv-paneli");
+      } else if (data.message === "ROLE_ADMIN") {
         navigate("/super-admin/boshqaruv-paneli");
       } else if (data.message === "ROLE_LEADER") {
         navigate("/leader/boshqaruv-paneli");
       }
       toast.success("Successfully login");
+      return;
     } catch (error) {
       console.log(error);
       toast.error("User error");
+      return;
     }
   };
 

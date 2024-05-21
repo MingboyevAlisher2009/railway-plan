@@ -174,7 +174,7 @@ const saidbarItem = [
 const Saidbar = () => {
   return (
     <aside className="fixed z-50 border-2 p-4 bg-white rounded-lg h-[95%]">
-      <Link to={"/super-admin/"}>
+      <Link to={"/super-admin/boshqaruv-paneli"}>
         <img className="w-16 mx-auto" src={logo} alt="Img not found" />
       </Link>
       <ul className="saidbar mt-5 flex flex-col gap-1">

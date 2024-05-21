@@ -41,25 +41,21 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="*" element={<Home />} />
+        {/* <Route path="*" element={<Home />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        {admin && (
-          <Route path="/super-admin" element={<GlobalPage />}>
-            <Route path="boshqaruv-paneli" element={<MainPage />} />
-            <Route path="hodimlar" element={<Hodimlar />} />
-            <Route path="pd" element={<YolUstalari />} />
-            <Route path="jadval" element={<Jadval />} />
-            <Route path="kuzatuv" element={<Kuzatuv />} />
-            <Route path="asboblar" element={<Asboblar />} />
-            <Route path="manzil" element={<Manzil />} />
-          </Route>
-        )}
-        {leader && (
-          <Route path="/leader" element={<GlobalPage />}>
-            <Route path="boshqaruv-paneli" element={<h1>Leader page</h1>} />
-          </Route>
-        )}
+        <Route path="/super-admin" element={<GlobalPage />}>
+          <Route path="boshqaruv-paneli" element={<MainPage />} />
+          <Route path="hodimlar" element={<Hodimlar />} />
+          <Route path="pd" element={<YolUstalari />} />
+          <Route path="jadval" element={<Jadval />} />
+          <Route path="kuzatuv" element={<Kuzatuv />} />
+          <Route path="asboblar" element={<Asboblar />} />
+          <Route path="manzil" element={<Manzil />} />
+        </Route>
+        <Route path="/leader" element={<GlobalPage />}>
+          <Route path="boshqaruv-paneli" element={<h1>Leader page</h1>} />
+        </Route>
       </Routes>
     </>
   );
