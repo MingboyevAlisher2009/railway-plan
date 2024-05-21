@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import { Button } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
+import MainPageServices from "../../services/main-page";
 
 const Hero = () => {
   const [toggle, setTogle] = useState(false);
+  const [adminData, setAdminData] = useState({});
+
+  const getAdminStatistic = async () => {
+    const { data } = await MainPageServices.getDataSuperAdmin();
+    setAdminData(data.body);
+  };
+
+  useEffect(() => {
+    getAdminStatistic();
+  }, []);
 
   return (
-    <div className="grid gap-5 gap-y-10 grid-cols-3 w-full">
+    <div className="grid gap-5 gap-y-10 grid-cols-3 mt-6 w-full">
       <article className="flex justify-between rounded-xl shadow-sm pb-5 bg-white p-4 border-2">
         <div className="relative ">
           <svg
@@ -28,7 +40,7 @@ const Hero = () => {
           <h6 className="text-sm text-gray-400">
             Bugungi jami ishlayotganlar soni
           </h6>
-          <h2 className="text-3xl font-bold">0</h2>
+          <h2 className="text-3xl font-bold">{adminData.employeeCount}</h2>
         </div>
       </article>
       <article className="flex justify-between rounded-xl shadow-sm pb-5 bg-white p-4 border-2">
@@ -52,7 +64,7 @@ const Hero = () => {
         </div>
         <div className="text-end">
           <h6 className="text-sm text-gray-400">Dam oluvchilar soni(otgul)</h6>
-          <h2 className="text-3xl font-bold">0</h2>
+          <h2 className="text-3xl font-bold">{adminData.vacationCount}</h2>
         </div>
       </article>
       <article className="flex justify-between rounded-xl shadow-sm pb-5 bg-white p-4 border-2">
@@ -75,7 +87,7 @@ const Hero = () => {
         </div>
         <div className="text-end">
           <h6 className="text-sm text-gray-400">Kasallar soni</h6>
-          <h2 className="text-3xl font-bold">0</h2>
+          <h2 className="text-3xl font-bold">{adminData.sickCount}</h2>
         </div>
       </article>
       <article className="flex justify-between rounded-xl shadow-sm pb-5 bg-white p-4 border-2">
@@ -95,7 +107,7 @@ const Hero = () => {
           <h6 className="text-sm text-gray-400">
             Ish haqi saqlanmagan holda (BS)
           </h6>
-          <h2 className="text-3xl font-bold">0</h2>
+          <h2 className="text-3xl font-bold">{adminData.onTrainingCount}</h2>
         </div>
       </article>
       <article className="flex justify-between rounded-xl shadow-sm pb-5 bg-white p-4 border-2">
@@ -119,7 +131,7 @@ const Hero = () => {
         </div>
         <div className="text-end">
           <h6 className="text-sm text-gray-400">Xizmat safarifda</h6>
-          <h2 className="text-3xl font-bold">0</h2>
+          <h2 className="text-3xl font-bold">{adminData.tripCount}</h2>
         </div>
       </article>
       <article className="flex justify-between rounded-xl shadow-sm pb-5 bg-white p-4 border-2">
@@ -143,7 +155,7 @@ const Hero = () => {
           >
             Malaka oshirishga (o'qishga ) {toggle ? "" : <br />} ketganlar soni
           </h6>
-          <h2 className="text-4xl font-bold">0</h2>
+          <h2 className="text-4xl font-bold">{adminData.tripCount}</h2>
         </div>
       </article>
     </div>

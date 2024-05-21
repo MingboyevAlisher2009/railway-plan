@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import MainPageServices from "../../services/main-page";
 
 const Menu = () => {
+  const [userStatistic, setUserStatistic] = useState({});
+
+  const getUserStatistcs = async () => {
+    const { data } = await MainPageServices.getUserStatistic();
+    setUserStatistic(data.body);
+  };
+
+  useEffect(() => {
+    getUserStatistcs();
+  }, []);
+
   return (
     <div className="grid grid-cols-4 gap-3 mt-10">
       <article className="flex justify-between w-full border bg-white p-3 rounded-xl">
@@ -20,7 +32,7 @@ const Menu = () => {
         </div>
         <div className="text-end">
           <span className="text-sm text-gray-400">Kuzatuvchilar soni</span>
-          <h2 className="text-4xl font-bold">0</h2>
+          <h2 className="text-4xl font-bold">{userStatistic.countAdmin}</h2>
         </div>
       </article>
       <article className="flex justify-between w-full border bg-white p-3 rounded-xl">
@@ -40,7 +52,7 @@ const Menu = () => {
         </div>
         <div className="text-end">
           <span className="text-sm text-gray-400">Lederlar soni soni</span>
-          <h2 className="text-4xl font-bold">0</h2>
+          <h2 className="text-4xl font-bold">{userStatistic.leaderCount}</h2>
         </div>
       </article>
       <article className="flex justify-between w-full border bg-white p-3 rounded-xl">
@@ -60,7 +72,7 @@ const Menu = () => {
         </div>
         <div className="text-end">
           <span className="text-sm text-gray-400">Yo'l ustlari soni</span>
-          <h2 className="text-4xl font-bold">0</h2>
+          <h2 className="text-4xl font-bold">{userStatistic.countPd}</h2>
         </div>
       </article>
       <article className="flex justify-between w-full border bg-white p-3 rounded-xl">
@@ -82,7 +94,7 @@ const Menu = () => {
           <span className="font-medium text-gray-400">
             Yo'l brigadalari soni
           </span>
-          <h2 className="text-4xl font-bold">0</h2>
+          <h2 className="text-4xl font-bold">{userStatistic.countPdb}</h2>
         </div>
       </article>
     </div>

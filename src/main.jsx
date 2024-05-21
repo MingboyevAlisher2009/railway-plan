@@ -5,10 +5,13 @@ import "./index.css";
 import "tw-elements-react/dist/css/tw-elements-react.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@material-tailwind/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Toaster position="top-center" richColors />
-    <App />
+    <ThemeProvider>
+      <Toaster position="top-center" richColors />
+      <App />
+    </ThemeProvider>
   </BrowserRouter>
 );

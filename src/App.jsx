@@ -21,7 +21,6 @@ function App() {
   const [admin, setAdmin] = useState();
   const [leader, setLeader] = useState();
 
-  console.log(role);
   useEffect(() => {
     if (!token) {
       navigate("/");

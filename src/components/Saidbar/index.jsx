@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../style/style.css";
+import { removeItems } from "../../helpers/storege";
+// import logo from "../../assets/"
 
 const saidbarItem = [
   {
@@ -165,11 +167,11 @@ const saidbarItem = [
     ),
     label: "Tizimdan chiqish",
     route: "/login",
+    login: true,
   },
 ];
 
 const Saidbar = () => {
-
   return (
     <aside className="fixed z-50 border-2 p-4 bg-white rounded-lg h-[95%]">
       <Link to={"/super-admin/"}>
@@ -187,6 +189,7 @@ const Saidbar = () => {
              duration-300"
           >
             <NavLink
+              onClick={() => item.login && removeItems()}
               className={"w-full h-full px-4 py-3 flex items-center gap-2"}
               to={item.route}
             >
