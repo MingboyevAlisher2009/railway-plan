@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth";
 import { setItem } from "../../helpers/storege";
 import { toast } from "sonner";
+import { Button } from "@material-tailwind/react";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setIsLoading(true);
     const userData = { phoneNumber: `+${phoneNumber}`, password };
     try {
       const { data } = await AuthService.login(userData);
+      console.log(data);
       setItem("token", data.body);
       setItem("role", data.message);
       if (data.message === "ROLE_SUPER_ADMIN") {
         navigate("/super-admin/boshqaruv-paneli");
       } else if (data.message === "ROLE_ADMIN") {
         navigate("/super-admin/boshqaruv-paneli");
-      } else if (data.message === "ROLE_LEADER") {
+      }else if (data.message === "ROLE_LEADER") {
         navigate("/leader/boshqaruv-paneli");
       }
-      toast.success("Successfully login");
-      return;
+      toast.success("Tizimga muvaffaqiyatli kirdingiz✔");
     } catch (error) {
       console.log(error);
-      toast.error("User error");
-      return;
+      toast.error("Telefon raqam yoki parolda xatolik mavjud");
+    }finally {
+      setIsLoading(false);
     }
   };
 
@@ -71,9 +76,9 @@ const Login = () => {
               </p>
               <div>
                 <div className="relative flex w-full">
-                  <button
-                    className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 bg-black text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none !absolute right-1 top-1 rounded z-50"
+                  <Button
                     type="button"
+                    className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 bg-black text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none !absolute  right-1 top-1 rounded z-50"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     <svg
@@ -90,7 +95,7 @@ const Login = () => {
                         clipRule="evenodd"
                       ></path>
                     </svg>
-                  </button>
+                  </Button>
                   <div className="relative w-full min-w-[200px] h-10">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -109,13 +114,15 @@ const Login = () => {
                 </p>
               </div>
             </div>
-            <button
-              className="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-black text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full mt-6"
-              type="button"
+            <Button
+              type="button" 
               onClick={handleLogin}
+              variant="gradient"
+              disabled={isLoading}
+              className=" align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-black text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full mt-6"
             >
-              Kirish
-            </button>
+              {isLoading ? "Yuklanmoqda..." : "Kirish"}
+            </Button>
             <a id="link" href="/auth/log-in"></a>
           </div>
         </div>
