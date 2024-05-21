@@ -32,7 +32,7 @@ const Navbar = () => {
         phoneNumber: `+998${phoneNumber}`,
         password,
       };
-      const dataa = await UserService.editUser(userData);
+      await UserService.editUser(userData);
       setModalToggle(false);
       toast(
         <div className="flex gap-2 text-lg">
@@ -62,7 +62,7 @@ const Navbar = () => {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [data.length]);
 
   return (
     <>
@@ -70,7 +70,7 @@ const Navbar = () => {
         <div>
           <ol class="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
             <li class="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
-              <Link to="/super-admin/">
+              <Link to="/super-admin/boshqaruv-paneli">
                 <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
                   Super-admin
                 </p>

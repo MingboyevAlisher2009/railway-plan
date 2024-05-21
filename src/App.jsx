@@ -24,18 +24,24 @@ function App() {
   useEffect(() => {
     if (!token) {
       navigate("/");
-    } else if (token && role === "ROLE_SUPER_ADMIN") {
+    }
+    if (
+      (token && role === "ROLE_SUPER_ADMIN") ||
+      (token && role === "ROLE_ADMIN")
+    ) {
       setAdmin(true);
       navigate("/super-admin/boshqaruv-paneli");
-    } else if (token && role === "ROLE_LEADER") {
+    }
+    if (token && role === "ROLE_LEADER") {
       setLeader(true);
       navigate("/leader/boshqaruv-paneli");
     }
-  }, [token, role]);
+  }, []);
 
   return (
     <>
       <Routes>
+        <Route path="*" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         {admin && (

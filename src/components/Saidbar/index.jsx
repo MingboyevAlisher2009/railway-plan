@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../style/style.css";
 import { removeItems } from "../../helpers/storege";
-// import logo from "../../assets/"
+import logo from "../../assets/RailLogo.png";
 
 const saidbarItem = [
   {
@@ -175,11 +175,7 @@ const Saidbar = () => {
   return (
     <aside className="fixed z-50 border-2 p-4 bg-white rounded-lg h-[95%]">
       <Link to={"/super-admin/"}>
-        <img
-          className="w-16 mx-auto"
-          src="https://pch14.uz/public/img/bacground/RailLogo.png"
-          alt="Img not found"
-        />
+        <img className="w-16 mx-auto" src={logo} alt="Img not found" />
       </Link>
       <ul className="saidbar mt-5 flex flex-col gap-1">
         {saidbarItem.map((item, i) => (

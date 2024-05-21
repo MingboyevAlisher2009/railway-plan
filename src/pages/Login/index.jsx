@@ -17,15 +17,18 @@ const Login = () => {
       console.log(data);
       setItem("token", data.body);
       setItem("role", data.message);
-      if (data.message === "ROLE_SUPER_ADMIN") {
+      if (
+        data.message === "ROLE_SUPER_ADMIN" ||
+        data.message === "ROLE_ADMIN"
+      ) {
         navigate("/super-admin/boshqaruv-paneli");
       } else if (data.message === "ROLE_LEADER") {
         navigate("/leader/boshqaruv-paneli");
       }
-      toast.success('Successfully registered')
+      toast.success("Successfully login");
     } catch (error) {
       console.log(error);
-      toast.error('User error');
+      toast.error("User error");
     }
   };
 

@@ -14,6 +14,7 @@ export default withMT({
         gray: {
           400: "#617e8c",
         },
+        "custom-gray": "#323232",
       },
     },
   },
