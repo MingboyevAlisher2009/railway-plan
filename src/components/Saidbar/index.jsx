@@ -166,12 +166,17 @@ const saidbarItem = [
       </svg>
     ),
     label: "Tizimdan chiqish",
-    route: "/login",
+    route: "/",
     login: true,
   },
 ];
 
 const Saidbar = () => {
+  const logout = () => {
+    removeItems();
+    window.location.pathname = "/";
+  };
+
   return (
     <aside className="fixed z-50 border-2 p-4 bg-white rounded-lg h-[95%]">
       <Link to={"/super-admin/boshqaruv-paneli"}>
@@ -185,7 +190,7 @@ const Saidbar = () => {
              duration-300"
           >
             <NavLink
-              onClick={() => item.login && removeItems()}
+              onClick={() => item.login && logout()}
               className={"w-full h-full px-4 py-3 flex items-center gap-2"}
               to={item.route}
             >

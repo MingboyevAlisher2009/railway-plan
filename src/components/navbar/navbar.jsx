@@ -33,6 +33,7 @@ const Navbar = () => {
         password,
       };
       await UserService.editUser(userData);
+      getUserData();
       setModalToggle(false);
       toast(
         <div className="flex gap-2 text-lg">
@@ -46,6 +47,7 @@ const Navbar = () => {
         </div>
       );
     } catch (error) {
+      console.log(error);
       toast(
         <div className="flex items-center gap-2">
           <img className="!w-7 !h-7" src={errorImg} alt="img not found" />
@@ -62,7 +64,7 @@ const Navbar = () => {
 
   useEffect(() => {
     getUserData();
-  }, [data.length]);
+  }, []);
 
   return (
     <>

@@ -1,15 +1,41 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import React, { useState } from "react";
+import { toast } from "sonner";
+import errorImg from "../../assets/cross.png";
+import DownloadService from "../../services/download";
 
 const DownloadModal = ({ toggle, setToggle }) => {
   const [date, setDate] = useState("");
   const [error, setEror] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (date.length === 0) {
       setEror(true);
     } else {
       setEror(false);
+    }
+    try {
+      await DownloadService.download(date);
+      toast(
+        <div className="flex gap-2 text-lg">
+          <img
+            width="30"
+            height="30"
+            src="https://img.icons8.com/fluency/48/ok--v1.png"
+            alt="ok--v1"
+          />
+          <h2>User updated succsefuly</h2>
+        </div>
+      );
+      setToggle(false);
+    } catch (error) {
+      console.log(error);
+      toast(
+        <div className="flex items-center gap-2">
+          <img className="!w-7 !h-7" src={errorImg} alt="img not found" />
+          <h2 className="text-lg">{error.response.data.error} !</h2>
+        </div>
+      );
     }
   };
 

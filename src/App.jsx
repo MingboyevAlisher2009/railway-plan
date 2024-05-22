@@ -30,7 +30,7 @@ function App() {
     } else if (token && role === "ROLE_LEADER") {
       navigate("/leader/boshqaruv-paneli");
     }
-  }, []);
+  }, [token, role]);
 
   return (
     <>
