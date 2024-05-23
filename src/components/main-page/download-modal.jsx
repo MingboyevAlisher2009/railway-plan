@@ -15,25 +15,14 @@ const DownloadModal = ({ toggle, setToggle }) => {
       setEror(false);
     }
     try {
-      await DownloadService.download(date);
-      toast(
-        <div className="flex gap-2 text-lg">
-          <img
-            width="30"
-            height="30"
-            src="https://img.icons8.com/fluency/48/ok--v1.png"
-            alt="ok--v1"
-          />
-          <h2>User updated succsefuly</h2>
-        </div>
-      );
+      const { data } = await DownloadService.download(date);
       setToggle(false);
     } catch (error) {
       console.log(error);
       toast(
         <div className="flex items-center gap-2">
           <img className="!w-7 !h-7" src={errorImg} alt="img not found" />
-          <h2 className="text-lg">{error.response.data.error} !</h2>
+          <h2 className="text-lg">Ma'lumot toliq kiritilmagan !</h2>
         </div>
       );
     }

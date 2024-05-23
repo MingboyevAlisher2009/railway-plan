@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getItem } from "../helpers/storege";
 
-axios.defaults.baseURL = "http://164.90.171.135:8081";
+axios.defaults.baseURL = "https://pch14.uz";
 
 axios.interceptors.request.use((config) => {
   const token = getItem("token");

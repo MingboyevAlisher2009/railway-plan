@@ -173,8 +173,8 @@ const saidbarItem = [
 
 const Saidbar = () => {
   const logout = () => {
-    removeItems();
     window.location.pathname = "/";
+    removeItems();
   };
 
   return (
@@ -186,7 +186,7 @@ const Saidbar = () => {
         {saidbarItem.map((item, i) => (
           <li
             key={i}
-            className="rounded-lg overflow-hidden text-gray-400 hover:bg-[#edf1f2] transition-all
+            className="rounded-lg overflow-hidden text-[#617e8c] hover:bg-[#edf1f2] transition-all
              duration-300"
           >
             <NavLink
