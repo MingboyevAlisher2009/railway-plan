@@ -3,7 +3,7 @@ import React from "react";
 const AsboblarModal = ({ AddIshQurol }) => {
   return (
     <>
-      <div className="bg-black/50 flex items-center justify-center fixed w-full z-50 left-0 top-0 h-full">
+      <div className="bg-black/50 flex items-center justify-center fixed w-full z-[100] left-0 top-0 h-full">
         <span
           data-type="inside"
           tabindex="0"

@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import AsboblarModal from "./AsboblarModal";
+import TahrirModal from "./TahrirModal";
 
 const Asboblar = () => {
   const [openModal, setOpenModal] = useState();
+  const [openTahrirModal, setOpenTahrirModal] = useState();
 
   const AddIshQurol = () => setOpenModal(!openModal);
-  return (
+  const AddTahrirModal = () => setOpenTahrirModal(!openTahrirModal)
+   return (
     <>
       {openModal && <AsboblarModal AddIshQurol={AddIshQurol} />}
+      {openTahrirModal && <TahrirModal AddTahrirModal={AddTahrirModal}/>}
       <div class="mt-12 mb-8 flex flex-col gap-12 ">
         <div class=" flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
           <div class="relative bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 shadow-lg -mt-6 mb-8 flex items-center justify-between p-6">
@@ -16,7 +20,7 @@ const Asboblar = () => {
             </h6>
             <button
               onClick={AddIshQurol}
-              className="text-black p-2 z-50 bg-white rounded-lg"
+              className="text-black p-2 z-[50] bg-white rounded-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +86,9 @@ const Asboblar = () => {
                     </div>
                   </td>
                   <td class="py-3 px-5  border-b border-blue-gray-50 flex py-5 gap-3">
-                    <p class="block antialiased font-sans cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out text-blue-gray-600">
+                    <p class="block antialiased font-sans cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out text-blue-gray-600"
+                    onClick={AddTahrirModal}
+                    >
                       <svg
                         stroke="currentColor"
                         fill="currentColor"
@@ -117,7 +123,10 @@ const Asboblar = () => {
                     </div>
                   </td>
                   <td class="py-3 px-5  border-b border-blue-gray-50 flex py-5 gap-3">
-                    <p class="block antialiased font-sans cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out text-blue-gray-600">
+                    <p class="block antialiased font-sans cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out text-blue-gray-600"
+                    onClick={AddTahrirModal}
+
+                    >
                       <svg
                         stroke="currentColor"
                         fill="currentColor"
@@ -152,7 +161,10 @@ const Asboblar = () => {
                     </div>
                   </td>
                   <td class="py-3 px-5  border-b border-blue-gray-50 flex py-5 gap-3">
-                    <p class="block antialiased font-sans cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out text-blue-gray-600">
+                    <p class="block antialiased font-sans cursor-pointer text-[1.2rem] font-semibold hover:text-yellow-300 duration-150 ease-in-out text-blue-gray-600"
+                    onClick={AddTahrirModal}
+
+                    >
                       <svg
                         stroke="currentColor"
                         fill="currentColor"
