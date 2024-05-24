@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
+    "@splidejs/react-splide": "^0.7.12",
     "axios": "^1.6.8",
     "boxicons": "^2.1.4",
     "react": "^18.2.0",

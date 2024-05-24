@@ -173,8 +173,8 @@ const saidbarItem = [
 
 const Saidbar = () => {
   const logout = () => {
-    window.location.pathname = "/";
     removeItems();
+    window.location.pathname = "/";
   };
 
   return (
