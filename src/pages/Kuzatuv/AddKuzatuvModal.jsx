@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddKuzatuvModal = ({AddKuzatuvModall}) => {
+const AddKuzatuvModal = ({ AddKuzatuvModall }) => {
   return (
     <div>
       <div className="bg-black/50 flex items-center justify-center fixed w-full h-full left-0 top-0 z-[70]">
@@ -9,13 +9,9 @@ const AddKuzatuvModal = ({AddKuzatuvModall}) => {
           tabindex="0"
           aria-hidden="true"
           data-floating-ui-focus-guard=""
-          // style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
           data-aria-hidden="true"
         ></span>
-        <div
-          class="grid place-items-center fixed w-screen h-screen  bg-opacity-60 backdrop-blur-sm"
-          // style="opacity: 1;"
-        >
+        <div class="grid place-items-center fixed w-screen h-screen  bg-opacity-60 backdrop-blur-sm">
           <div
             tabindex="-1"
             class="relative bg-white m-4 rounded-lg shadow-2xl text-blue-gray-500 antialiased font-sans text-base font-light leading-relaxed w-full md:w-3/4 lg:w-3/5 2xl:w-2/5 min-w-[90%] md:min-w-[75%] lg:min-w-[60%] 2xl:min-w-[40%] max-w-[60%] md:max-w-[75%] lg:max-w-[60%] 2xl:max-w-[40%]"
@@ -23,7 +19,6 @@ const AddKuzatuvModal = ({AddKuzatuvModall}) => {
             aria-describedby=":r4v:-description"
             id=":r50:"
             role="dialog"
-            // style="opacity: 1; transform: none;"
           >
             <div class="shrink-0 p-4 text-blue-gray-900 antialiased font-sans text-2xl font-semibold leading-snug flex items-center justify-between">
               Kuzatuvchi qo'shish
@@ -154,7 +149,6 @@ const AddKuzatuvModal = ({AddKuzatuvModall}) => {
           tabindex="0"
           aria-hidden="true"
           data-floating-ui-focus-guard=""
-          // style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
           data-aria-hidden="true"
         ></span>
       </div>

@@ -1,6 +1,30 @@
-import React from "react";
+import { Option, Select } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
+import PanelService from "../../services/panel";
+import JadvalService from "../../services/jadval";
 
-const AddBrigader = ({AddBrigaderModal}) => {
+const AddBrigader = ({ AddBrigaderModal }) => {
+  const [pd, setPd] = useState([]);
+  const getPd = async () => {
+    const { data } = await PanelService.getPDAll();
+    setPd(data.body);
+  };
+
+  const [pdData, setPdData] = useState({
+    name: "",
+    userFullName: "",
+    pdId: 1,
+  });
+
+  const addPdb = async () => {
+    const { data } = JadvalService.addPd(pdData);
+    console.log(data);
+  };
+
+  useEffect(() => {
+    getPd();
+  }, []);
+
   return (
     <>
       <div className=" bg-black/50 flex items-center justify-center fixed w-full left-0 top-0 h-full z-[100]">
@@ -9,13 +33,9 @@ const AddBrigader = ({AddBrigaderModal}) => {
           tabindex="0"
           aria-hidden="true"
           data-floating-ui-focus-guard=""
-          // style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
           data-aria-hidden="true"
         ></span>
-        <div
-          class="grid place-items-center fixed w-screen h-screen bg-opacity-60 backdrop-blur-sm"
-          // style="opacity: 1;"
-        >
+        <div class="grid place-items-center fixed w-screen h-screen bg-opacity-60 backdrop-blur-sm">
           <div
             tabindex="-1"
             class="relative bg-white m-4 rounded-lg shadow-2xl text-blue-gray-500 antialiased font-sans text-base font-light leading-relaxed w-full md:w-3/4 lg:w-3/5 2xl:w-2/5 min-w-[90%] md:min-w-[75%] lg:min-w-[60%] 2xl:min-w-[40%] max-w-[60%] md:max-w-[75%] lg:max-w-[60%] 2xl:max-w-[40%]"
@@ -23,7 +43,6 @@ const AddBrigader = ({AddBrigaderModal}) => {
             aria-describedby=":r6j:-description"
             id=":r6k:"
             role="dialog"
-            // style="opacity: 1; transform: none;"
           >
             <div class="shrink-0 p-4 text-blue-gray-900 antialiased font-sans text-2xl font-semibold leading-snug flex items-center justify-between">
               Brigader qo'shish
@@ -48,6 +67,10 @@ const AddBrigader = ({AddBrigaderModal}) => {
                 <div class="w-full max-w-[24rem]">
                   <div class="relative w-full min-w-[200px] h-10">
                     <input
+                      value={pdData.name}
+                      onChange={(e) =>
+                        setPdData({ ...pdData, name: e.target.value })
+                      }
                       id="addname"
                       class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                       placeholder=" "
@@ -60,6 +83,11 @@ const AddBrigader = ({AddBrigaderModal}) => {
                 <div class="w-full max-w-[24rem]">
                   <div class="relative w-full min-w-[200px] h-10">
                     <input
+                      type="text"
+                      value={pdData.userFullName}
+                      onChange={(e) =>
+                        setPdData({ ...pdData, userFullName: e.target.value })
+                      }
                       id="addlastname"
                       class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                       placeholder=" "
@@ -70,33 +98,17 @@ const AddBrigader = ({AddBrigaderModal}) => {
                   </div>
                 </div>
                 <div class="w-full max-w-[24rem]">
-                  <div class="relative w-full min-w-[200px] h-10">
-                    <button
-                      type="button"
-                      class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal text-left outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all border text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200"
-                      aria-expanded="false"
-                      aria-haspopup="listbox"
-                      role="combobox"
-                    >
-                      <span class="absolute top-2/4 -translate-y-2/4 left-3 pt-0.5"></span>
-                      <div class="grid place-items-center absolute top-2/4 right-2 pt-px w-5 h-5 text-blue-gray-400 rotate-0 -translate-y-2/4 transition-all">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"
-                          ></path>
-                        </svg>
-                      </div>
-                    </button>
-                    <label class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal transition-all -top-1.5 before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:rounded-tr-md after:pointer-events-none after:transition-all peer-disabled:after:border-transparent text-sm peer-disabled:text-blue-gray-400 leading-[3.75] text-blue-gray-400 before:border-transparent after:border-transparent">
-                      Bo'linma tanlang
-                    </label>
-                  </div>
+                  <Select size="lg" label="Yo'l ustalari">
+                    {pd && pd.length ? (
+                      pd.map((item) => (
+                        <Option key={item.id} value={item.id}>
+                          {item.name}
+                        </Option>
+                      ))
+                    ) : (
+                      <Option disabled>Ma'lumot yo'q</Option>
+                    )}
+                  </Select>
                 </div>
               </div>
             </div>
@@ -110,6 +122,7 @@ const AddBrigader = ({AddBrigaderModal}) => {
               </button>
               <span class="cursor-not-allowed">
                 <button
+                  onClick={addPdb}
                   disabled=""
                   class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]"
                   type="button"
@@ -125,7 +138,6 @@ const AddBrigader = ({AddBrigaderModal}) => {
           tabindex="0"
           aria-hidden="true"
           data-floating-ui-focus-guard=""
-          // style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: fixed; white-space: nowrap; width: 1px; top: 0px; left: 0px;"
           data-aria-hidden="true"
         ></span>
       </div>

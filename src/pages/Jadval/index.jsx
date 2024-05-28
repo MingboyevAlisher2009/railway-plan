@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddBrigader from "./AddBrigader";
+import PanelService from "../../services/panel";
+import { Option, Select } from "@material-tailwind/react";
 
 const Jadval = () => {
-
+  const [pd, setPd] = useState([]);
+  const [pdb, setPdb] = useState([]);
   const [openBrigaderModal, setOpenBrigaderModal] = useState();
 
-  const AddBrigaderModal = () => setOpenBrigaderModal(!openBrigaderModal)
+  const getPd = async () => {
+    const { data } = await PanelService.getPDAll();
+    setPd(data.body);
+  };
+
+  const getPdb = async (e) => {
+    const { data } = await PanelService.getPDBAll(e);
+    setPdb(data.body);
+  };
+
+  console.log(pdb);
+  useEffect(() => {
+    getPd();
+  }, []);
+
+  const AddBrigaderModal = () => setOpenBrigaderModal(!openBrigaderModal);
   return (
     <>
-    {openBrigaderModal && <AddBrigader AddBrigaderModal={AddBrigaderModal}/>}
+      {openBrigaderModal && <AddBrigader AddBrigaderModal={AddBrigaderModal} />}
       <div class="mt-12 mb-8 flex flex-col gap-12 ">
         <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
           <div class="relative bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 shadow-lg -mt-6 mb-8 flex items-center justify-between p-6">
@@ -35,31 +53,17 @@ const Jadval = () => {
             <div class="w-full flex justify-center items-center gap-5">
               <div class="w-full max-w-[24rem]">
                 <div class="relative w-full min-w-[200px] h-10">
-                  <button
-                    type="button"
-                    class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal text-left outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all border text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200"
-                    aria-expanded="false"
-                    aria-haspopup="listbox"
-                    role="combobox"
-                  >
-                    <span class="absolute top-2/4 -translate-y-2/4 left-3 pt-0.5"></span>
-                    <div class="grid place-items-center absolute top-2/4 right-2 pt-px w-5 h-5 text-blue-gray-400 rotate-0 -translate-y-2/4 transition-all">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clip-rule="evenodd"
-                        ></path>
-                      </svg>
-                    </div>
-                  </button>
-                  <label class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal transition-all -top-1.5 before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:rounded-tr-md after:pointer-events-none after:transition-all peer-disabled:after:border-transparent text-sm peer-disabled:text-blue-gray-400 leading-[3.75] text-blue-gray-400 before:border-transparent after:border-transparent">
-                    Bo'linmani tanlang
-                  </label>
+                  <Select onChange={getPdb} size="lg" label="Yo'l ustalari">
+                    {pd && pd.length ? (
+                      pd.map((item) => (
+                        <Option key={item.id} value={item.id}>
+                          {item.name}
+                        </Option>
+                      ))
+                    ) : (
+                      <Option disabled>Ma'lumot yo'q</Option>
+                    )}
+                  </Select>
                 </div>
               </div>
             </div>
@@ -90,16 +94,40 @@ const Jadval = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td class="">
-                      <p class="block antialiased font-sans cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
-                        Ma'lumot yo'q
-                      </p>
-                    </td>
-                    <td></td>
-                  </tr>
+                  {pdb &&
+                    pdb.map((item) => (
+                      <tr className="py-3 px-5" key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.userFullName}</td>
+                        <td>
+                          <svg
+                            className="hover:fill-yellow-500"
+                            stroke="currentColor"
+                            fill="currentColor"
+                            stroke-width="0"
+                            viewBox="0 0 576 512"
+                            height="1em"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path>
+                          </svg>
+                        </td>
+                      </tr>
+                    ))}
+                  {pdb.length === 0 && (
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td class="">
+                        <p class="block antialiased font-sans cursor-pointer text-md font-semibold hover:text-red-300 duration-150 ease-in-out text-blue-gray-600">
+                          Ma'lumot yo'q
+                        </p>
+                      </td>
+                      <td></td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
